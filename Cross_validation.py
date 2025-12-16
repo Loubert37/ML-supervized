@@ -9,7 +9,28 @@ scores.keys()
 
 print('Global accuracy over all folds: %0.6f (+/- %0.6f)'
       % (scores['test_accuracy'].mean(), scores['test_accuracy'].std() * 2))
+
 print('For each metric, list the score values on each fold:')
 for metric in sorted(scores.keys()):
-    print(str(['{:.6f}'.format(value) for value in scores[metric]]) + ' ' +metric)
-pds.DataFrame(scores).mean()
+    print(
+        str(['{:.6f}'.format(value) for value in scores[metric]])
+        + ' ' + metric
+    )
+
+df_scores = pds.DataFrame({
+    'Accuracy': scores['test_accuracy'],
+    'Precision (macro)': scores['test_precision_macro'],
+    'Precision (weighted)': scores['test_precision_weighted'],
+    'Recall (macro)': scores['test_recall_macro'],
+    'Recall (weighted)': scores['test_recall_weighted'],
+    'F1 (macro)': scores['test_f1_macro'],
+    'F1 (weighted)': scores['test_f1_weighted']
+})
+
+# Nommer les folds
+df_scores.index = [f'Fold {i+1}' for i in range(len(df_scores))]
+
+# Arrondir pour affichage / Excel
+df_scores = df_scores.round(6)
+
+df_scores
