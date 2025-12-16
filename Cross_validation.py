@@ -1,3 +1,21 @@
+#Evaluation avec les autres indicateurs
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_predict))
+report_dict = classification_report(
+    y_test,
+    y_predict,
+    output_dict=True
+)
+
+df_report = pds.DataFrame(report_dict).transpose()
+
+df_report = df_report.round(6)
+
+df_report
+
+#Cross-validation
+
 from sklearn.model_selection import StratifiedKFold #cross-validation splitter
 from sklearn.model_selection import cross_validate #cross-validation evaluation of metrics
 scoring = ['accuracy', 'precision_macro', 'precision_weighted', 'recall_macro', 'recall_weighted', 'f1_macro', 'f1_weighted']
