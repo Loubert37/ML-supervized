@@ -19,11 +19,8 @@ for metric in sorted(scores.keys()):
 
 df_scores = pds.DataFrame({
     'Accuracy': scores['test_accuracy'],
-    'Precision (macro)': scores['test_precision_macro'],
     'Precision (weighted)': scores['test_precision_weighted'],
-    'Recall (macro)': scores['test_recall_macro'],
     'Recall (weighted)': scores['test_recall_weighted'],
-    'F1 (macro)': scores['test_f1_macro'],
     'F1 (weighted)': scores['test_f1_weighted']
 })
 
@@ -34,3 +31,5 @@ df_scores.index = [f'Fold {i+1}' for i in range(len(df_scores))]
 df_scores = df_scores.round(6)
 
 df_scores
+
+#Copier-coller directement dans canva
