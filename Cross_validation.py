@@ -42,10 +42,10 @@ df_scores = pds.DataFrame({
     'F1 (weighted)': scores['test_f1_weighted']
 })
 
-# Nommer les folds
 df_scores.index = [f'Fold {i+1}' for i in range(len(df_scores))]
+df_scores.loc['Mean'] = df_scores.mean()
+df_scores.loc['Std'] = df_scores.std() 
 
-# Arrondir pour affichage / Excel
 df_scores = df_scores.round(6)
 
 df_scores
